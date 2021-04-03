@@ -1,0 +1,9 @@
+.CardList {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+}
+
+.CardList > div {
+  margin: 0 25px 25px 0;
+}
