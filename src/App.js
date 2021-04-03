@@ -43,7 +43,7 @@ class App extends React.Component {
   }
 
   loadData = () => {
-    if (JSON.parse(localStorage.getItem('savedCards')).length === 0) {
+    if (JSON.parse(localStorage.getItem('savedCards')) === null) {
       fetch('https://geolocation-db.com/json/')
       .then(response => response.json())
       .then((result) => {
