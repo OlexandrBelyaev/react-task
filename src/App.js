@@ -48,7 +48,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then((result) => {
         this.setState({ location: result });
-      })
+      }) 
       .then(() => {
         this.loadWhether(this.state.location.city);
       });
@@ -61,7 +61,7 @@ class App extends React.Component {
 
   loadWhether = (city) => {
     // eslint-disable-next-line max-len
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.state.key}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.state.key}`)
       .then(response => response.json())
       .then((result) => {
         (result.cod === 200) &&
