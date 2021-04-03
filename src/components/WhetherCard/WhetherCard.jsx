@@ -10,7 +10,6 @@ const WhetherCard = ({
   background,
   deleteCard,
   id,
-  chartBackground
 }) => {
   const [temperatureSystem, changeSystem] = useState('c');
   const main = Object.assign({}, whether.main);
@@ -19,7 +18,8 @@ const WhetherCard = ({
   const wind = Object.assign({}, whether.wind);
 
   const { description, icon } = Object.assign({}, weather[0]);
-  
+  const averageTemp = (main.temp_max + main.temp_min) / 2;
+
   const convertToFarengate = (Kelvin) => {
     return Math.round(Kelvin * 9 / 5 - 459.67).toString();
   };
@@ -96,7 +96,7 @@ const WhetherCard = ({
       </div>
       <div className="WhetherCard__chart">
         <WeatherChart
-          chartBackground={chartBackground}
+          averageTemp={averageTemp}
         />
       </div>
       <div className="WhetherCard__templine">

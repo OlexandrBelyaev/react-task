@@ -9,7 +9,6 @@ class App extends React.Component {
     savedCards: [],
     key: '1c5a9a29fe1346947d780b45fcf95006',
     background: '#FFF1FE',
-    chartBackground: '#C5C5C5',
     searchNameCity: '',
     localization: {
       en: {
@@ -74,10 +73,17 @@ class App extends React.Component {
       .then(() => {
         localStorage.setItem('savedCards', JSON.stringify(this.state.savedCards));
       });
+
+      if (localStorage.getItem('lang') !== null) {
+        this.setState({
+          lang: localStorage.getItem('lang'),
+        });
+      }
   }
 
   changeLanguage = (e) => {
     this.setState({ lang: e.target.value });
+    localStorage.setItem('lang', e.target.value);
   }
 
   setBackgroundCard = (background) => {
@@ -192,7 +198,6 @@ class App extends React.Component {
           language={this.state.lang}
           background={this.state.background}
           deleteCard={this.deleteCard}
-          chartBackground={this.state.chartBackground}
         />
       </div>
     );
