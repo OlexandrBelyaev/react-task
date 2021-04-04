@@ -1,7 +1,7 @@
 import React from 'react';
-import './CardList.css';
+import './CardList.scss';
 import PropTypes from 'prop-types';
-import WhetherCard from '../WhetherCard/WhetherCard';
+import WeatherCard from '../WeatherCard/WeatherCard';
 
 const CardList = ({
   savedCards,
@@ -11,20 +11,18 @@ const CardList = ({
   deleteCard,
   chartBackground,
 }) => {
-
-  console.log(background);
   return (
     <div className="CardList">
       {
         savedCards.map((card, index) =>
-          <WhetherCard
+          <WeatherCard
             key={index}
-            whether={card}
+            weather={card}
             localization={localization}
-            language={language}
             background={background}
             deleteCard={deleteCard}
             id={index}
+            language={language}
             chartBackground={chartBackground}
           />
         )
@@ -35,18 +33,17 @@ const CardList = ({
 
 CardList.propTypes = {
   savedCards: PropTypes.arrayOf(
-    PropTypes.array,
+    PropTypes.object,
   ),
   localization: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
-  background: PropTypes.shape({
-    color: PropTypes.string.isRequired,
-  }).isRequired,
+  background: PropTypes.string,
   deleteCard: PropTypes.func.isRequired,
 };
 
 CardList.defultProps = {
   savedCards: [],
+  background: '#FFF1FE',
 };
 
 export default CardList;

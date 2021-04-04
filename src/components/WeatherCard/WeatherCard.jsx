@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './WhetherCard.css';
+import './WeatherCard.scss';
 import WeatherChart from '../WeatherChart/WeatherChart';
 
-const WhetherCard = ({
-  whether,
+const WeatherCard = ({
+  weather,
   localization,
   language,
   background,
@@ -12,12 +12,10 @@ const WhetherCard = ({
   id,
 }) => {
   const [temperatureSystem, changeSystem] = useState('c');
-  const main = Object.assign({}, whether.main);
-  const weather = Object.assign({}, whether.weather);
-  const sys = Object.assign({}, whether.sys);
-  const wind = Object.assign({}, whether.wind);
-
-  const { description, icon } = Object.assign({}, weather[0]);
+  const main = Object.assign({}, weather.main);
+  const weatherDetails = Object.assign({}, weather.weather);
+  const sys = Object.assign({}, weather.sys);
+  const wind = Object.assign({}, weather.wind);
   const averageTemp = (main.temp_max + main.temp_min) / 2;
 
   const convertToFarengate = (Kelvin) => {
@@ -69,50 +67,50 @@ const WhetherCard = ({
   };
 
   return (
-    <div className="WhetherCard" style={{ background: background.color }}>
-      <div className="WhetherCard__header">
-        <div className="WhetherCard__city">
-          {`${whether.name}, ${sys.country}`}
+    <div className="WeatherCard" style={{ background: background }}>
+      <div className="WeatherCard__header">
+        <div className="WeatherCard__city">
+          {`${weather.name}, ${sys.country}`}
         </div>
-        <div className="WhetherCard__iconWhether">
+        <div className="WeatherCard__iconWeather">
           <img
-            className="WhetherCard__icon"
-            src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+            className="WeatherCard__icon"
+            src={`http://openweathermap.org/img/wn/${weatherDetails[0].icon}@2x.png`}
             alt="weatherIcon"
           />
-          <div className="WhetherCard__whetherDescription">
-            {description}
+          <div className="WeatherCard__weatherDescription">
+            {weatherDetails[0].description}
           </div>
           <button
-            className="WhetherCard__deleteCard"
+            className="WeatherCard__deleteCard"
             onClick={deleteCard(id)}
           >
-              {`x`}
-            </button>
+            {`x`}
+          </button>
         </div>
       </div>
-      <div className="WhetherCard__date">
+      <div className="WeatherCard__date">
         {getActualDate()}
       </div>
-      <div className="WhetherCard__chart">
+      <div className="WeatherCard__chart">
         <WeatherChart
           averageTemp={convertToCelsy(averageTemp)}
         />
       </div>
-      <div className="WhetherCard__templine">
-        <div className="WhetherCard__tempcontainer">
-          <div className="WhetherCard__tempToggle">
+      <div className="WeatherCard__templine">
+        <div className="WeatherCard__tempcontainer">
+          <div className="WeatherCard__tempToggle">
             {
               temperatureSystem === 'c'
                 ? (
-                  <span className="WhetherCard__temp">
+                  <span className="WeatherCard__temp">
                     {
                       convertToCelsy(main.temp)
                     }
                   </span>
                 )
                 : (
-                  <span className="WhetherCard__temp">
+                  <span className="WeatherCard__temp">
                     {
                       convertToFarengate(main.temp)
                     }
@@ -123,8 +121,8 @@ const WhetherCard = ({
               href="#1"
               className={
                 temperatureSystem === 'c'
-                  ? 'WhetherCard__temptype-active'
-                  : 'WhetherCard__temptype'
+                  ? 'WeatherCard__temptype-active'
+                  : 'WeatherCard__temptype'
               }
               onClick={() => {
                 changeSystem('c');
@@ -137,8 +135,8 @@ const WhetherCard = ({
               href="#1"
               className={
                 temperatureSystem === 'f'
-                  ? 'WhetherCard__temptype-active'
-                  : 'WhetherCard__temptype'
+                  ? 'WeatherCard__temptype-active'
+                  : 'WeatherCard__temptype'
               }
               onClick={() => {
                 changeSystem('f');
@@ -147,7 +145,7 @@ const WhetherCard = ({
               ℉
             </span>
           </div>
-          <div className="WhetherCard__feelslike">
+          <div className="WeatherCard__feelslike">
             {
               temperatureSystem === 'c'
                 ? `${localization[language].feelsLike} ${
@@ -160,18 +158,18 @@ const WhetherCard = ({
           </div>
         </div>
         <div>
-          <div className="WhetherCard__additional">
+          <div className="WeatherCard__additional">
             <div>
               {`${localization[language].wind}: `}
-              <b className="WhetherCard__additional-blue">{`${wind.speed} m/s`}</b>
+              <b className="WeatherCard__additional-blue">{`${wind.speed} m/s`}</b>
             </div>
             <div>
               {`${localization[language].humidity}:`}
-              <b className="WhetherCard__additional-blue">{` ${main.humidity}`}</b>
+              <b className="WeatherCard__additional-blue">{` ${main.humidity}`}</b>
             </div>
             <div>
               {`${localization[language].pressure}:`}
-              <b className="WhetherCard__additional-blue">{` ${main.pressure}`}</b>
+              <b className="WeatherCard__additional-blue">{` ${main.pressure}`}</b>
             </div>
           </div>
         </div>
@@ -180,15 +178,17 @@ const WhetherCard = ({
   );
 };
 
-WhetherCard.propTypes = {
-  whether: PropTypes.object.isRequired,
+WeatherCard.propTypes = {
+  weather: PropTypes.object.isRequired,
   localization: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
-  background: PropTypes.shape({
-    color: PropTypes.string.isRequired,
-  }).isRequired,
+  background: PropTypes.string,
   deleteCard: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
 };
 
-export default WhetherCard;
+WeatherCard.defaultProps = {
+  background: '#FFF1FE',
+};
+
+export default WeatherCard;

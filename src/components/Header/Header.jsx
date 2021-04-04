@@ -11,6 +11,8 @@ const Header = ({
   setBackgroundCard,
   changeLanguage,
   lang,
+  autocompleted,
+  searchNameCity
 }) => {
   return (
     <div className="Header">
@@ -18,14 +20,14 @@ const Header = ({
         <SearchField
           setSearchNameCity={setSearchNameCity}
           localization={localization}
-          lang={lang}
+          autocompleted={autocompleted}
         />
         <button
           className="Header__searchButton"
           type="button"
           onClick={addCard}
         >
-          {localization[lang].searchBitton}
+          {localization.searchButton}
         </button>
       </div>
       <div className="Header__modificators">
