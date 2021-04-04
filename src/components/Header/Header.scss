@@ -1,0 +1,35 @@
+.Header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+
+  &__search {
+    display: flex;
+    vertical-align: middle;
+  }
+
+  &__searchBar {
+    box-sizing: border-box;
+    margin: 5px;
+    height: 30px;
+    border: none;
+    box-shadow: 0 14px 28px rgba(133, 133, 133, 0.25), 0 10px 10px rgba(133, 133, 133, 0.22);
+  }
+
+  &__searchButton {
+    margin: 5px;
+    height: 50px;
+    width: 100px;
+    align-self: center;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    background-color: dodgerblue;
+  }
+
+  &__modificators {
+    display: flex;
+  }
+}

@@ -11,6 +11,8 @@ const CardList = ({
   deleteCard,
   chartBackground,
 }) => {
+
+  console.log(background);
   return (
     <div className="CardList">
       {
@@ -33,11 +35,13 @@ const CardList = ({
 
 CardList.propTypes = {
   savedCards: PropTypes.arrayOf(
-    PropTypes.object,
+    PropTypes.array,
   ),
   localization: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
-  background: PropTypes.string.isRequired,
+  background: PropTypes.shape({
+    color: PropTypes.string.isRequired,
+  }).isRequired,
   deleteCard: PropTypes.func.isRequired,
 };
 

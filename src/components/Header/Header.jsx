@@ -1,10 +1,12 @@
 import React from 'react';
-import './Header.css';
+import './Header.scss';
+import SelectLanguage from '../SelectLanguage/SelectLanguage';
+import Palette from '../Palette/Palette';
+import SearchField from '../SearchField/SearchField';
 
 const Header = ({
   localization,
   setSearchNameCity,
-  searchNameCity,
   addCard,
   setBackgroundCard,
   changeLanguage,
@@ -12,13 +14,11 @@ const Header = ({
 }) => {
   return (
     <div className="Header">
-      <div>
-        <input
-          type="text"
-          className="Header__searchBar"
-          placeholder={localization[lang].placeholder}
-          onChange={setSearchNameCity}
-          value={searchNameCity}
+      <div className="Header__search">
+        <SearchField
+          setSearchNameCity={setSearchNameCity}
+          localization={localization}
+          lang={lang}
         />
         <button
           className="Header__searchButton"
@@ -29,49 +29,14 @@ const Header = ({
         </button>
       </div>
       <div className="Header__modificators">
-        <div className="Header__palette">
-          Palette:
-          <button
-            className="Header__paletteButtons"
-            onClick={setBackgroundCard('#FFF1FE')}
-          ></button>
-          <button
-            className="Header__paletteButtons"
-            onClick={setBackgroundCard('#F1F2FF')}
-          ></button>
-          <button
-            className="Header__paletteButtons"
-            onClick={setBackgroundCard('#459DE9')}
-          ></button>
-          <button
-            className="Header__paletteButtons"
-            onClick={setBackgroundCard('#F2F2F2')}
-          ></button>
-          <button
-            className="Header__paletteButtons"
-            onClick={setBackgroundCard('#C5C5C5')}
-          ></button>
-          <button
-            className="Header__paletteButtons"
-            onClick={setBackgroundCard('#8D8D8D')}
-          ></button>
-        </div>
+        <Palette
+          setBackgroundCard={setBackgroundCard}
+        />
 
-        <select
-          className="Header__langSelector"
-          onChange={changeLanguage}
-          value={lang}
-        >
-          <option value="en">
-            EN
-          </option>
-          <option value="ua">
-            UA
-          </option>
-          <option value="ru">
-            RU
-          </option>
-        </select>
+        <SelectLanguage
+          changeLanguage={changeLanguage}
+          lang={lang}
+        />
       </div>
     </div>
   );

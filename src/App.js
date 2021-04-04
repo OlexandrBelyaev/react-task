@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import './components/Header/Header.css';
-import Header from './components/Header/Header.jsx';
+import Header from './components/Header/Header';
 import CardList from './components/CardList/CardList';
 
 class App extends React.Component {
@@ -105,7 +104,7 @@ class App extends React.Component {
 
   setSearchNameCity = (e) => {
     this.setState({
-      searchNameCity: e.target.value,
+      searchNameCity: e,
     });
   }
 

@@ -69,7 +69,7 @@ const WhetherCard = ({
   };
 
   return (
-    <div className="WhetherCard" style={{ background: background }}>
+    <div className="WhetherCard" style={{ background: background.color }}>
       <div className="WhetherCard__header">
         <div className="WhetherCard__city">
           {`${whether.name}, ${sys.country}`}
@@ -184,7 +184,9 @@ WhetherCard.propTypes = {
   whether: PropTypes.object.isRequired,
   localization: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
-  background: PropTypes.string.isRequired,
+  background: PropTypes.shape({
+    color: PropTypes.string.isRequired,
+  }).isRequired,
   deleteCard: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
 };

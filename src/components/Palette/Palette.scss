@@ -1,0 +1,37 @@
+.Palette {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  &__buttons {
+    width: 70px;
+    height: 30px;
+    border: 1px solid gainsboro;
+    margin: 0 10px;
+  }
+}
+
+.Palette__buttons:nth-child(1) {
+  background-color: #FFF1FE;
+}
+
+.Palette__buttons:nth-child(2) {
+  background-color: #F1F2FF;
+}
+
+.Palette__buttons:nth-child(3) {
+  background-color: #459DE9;
+}
+
+.Palette__buttons:nth-child(4) {
+  background-color: #F2F2F2;
+}
+
+.Palette__buttons:nth-child(5) {
+  background-color: #C5C5C5;
+}
+
+.Palette__buttons:nth-child(6) {
+  background-color: #8D8D8D;
+}
+
