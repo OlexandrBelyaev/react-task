@@ -96,7 +96,7 @@ const WhetherCard = ({
       </div>
       <div className="WhetherCard__chart">
         <WeatherChart
-          averageTemp={averageTemp}
+          averageTemp={convertToCelsy(averageTemp)}
         />
       </div>
       <div className="WhetherCard__templine">

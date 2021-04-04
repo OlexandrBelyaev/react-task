@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import './components/Header/Header.css';
+import Header from './components/Header/Header.jsx';
 import CardList from './components/CardList/CardList';
 
 class App extends React.Component {
@@ -57,6 +58,12 @@ class App extends React.Component {
         savedCards: JSON.parse(localStorage.getItem('savedCards')),
       });
     }
+
+    if (!!localStorage.getItem('lang')) {
+      this.setState({
+        lang: localStorage.getItem('lang'),
+      });
+    }
   }
 
   loadWhether = (city) => {
@@ -73,12 +80,6 @@ class App extends React.Component {
       .then(() => {
         localStorage.setItem('savedCards', JSON.stringify(this.state.savedCards));
       });
-
-      if (localStorage.getItem('lang') !== null) {
-        this.setState({
-          lang: localStorage.getItem('lang'),
-        });
-      }
   }
 
   changeLanguage = (e) => {
@@ -130,68 +131,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className="Header">
-          <div>
-            <input
-              type="text"
-              className="Header__searchBar"
-              placeholder={this.state.localization[this.state.lang].placeholder}
-              onChange={this.setSearchNameCity}
-              value={this.state.searchNameCity}
-            />
-            <button
-              className="Header__searchButton"
-              type="button"
-              onClick={this.addCard}
-            >
-              {this.state.localization[this.state.lang].searchBitton}
-            </button>
-          </div>
-          <div className="Header__modificators">
-            <div className="Header__palette">
-              Palette:
-              <button
-                className="Header__paletteButtons"
-                onClick={this.setBackgroundCard('#FFF1FE')}
-              ></button>
-              <button
-                className="Header__paletteButtons"
-                onClick={this.setBackgroundCard('#F1F2FF')}
-              ></button>
-              <button
-                className="Header__paletteButtons"
-                onClick={this.setBackgroundCard('#459DE9')}
-              ></button>
-              <button
-                className="Header__paletteButtons"
-                onClick={this.setBackgroundCard('#F2F2F2')}
-              ></button>
-              <button
-                className="Header__paletteButtons"
-                onClick={this.setBackgroundCard('#C5C5C5')}
-              ></button>
-              <button
-                className="Header__paletteButtons"
-                onClick={this.setBackgroundCard('#8D8D8D')}
-              ></button>
-            </div>
-
-            <select
-              className="Header__langSelector"
-              onChange={this.changeLanguage}
-            >
-              <option value="en">
-                EN
-              </option>
-              <option value="ua">
-                UA
-              </option>
-              <option value="ru">
-                RU
-              </option>
-            </select>
-          </div>
-        </div>
+        <Header
+          localization={this.state.localization}
+          setSearchNameCity={this.setSearchNameCity}
+          searchNameCity={this.state.searchNameCity}
+          addCard={this.addCard}
+          setBackgroundCard={this.setBackgroundCard}
+          changeLanguage={this.changeLanguage}
+          lang={this.state.lang}
+        />
         <CardList
           savedCards={this.state.savedCards}
           localization={this.state.localization}
